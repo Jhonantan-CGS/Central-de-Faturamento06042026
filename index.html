@@ -1072,25 +1072,53 @@
     padding: 32px;
     gap: 16px;
     border-left: 1px solid var(--border);
+    min-height: 320px;
+    justify-content: center;
   }
 
   .hero-title-copy { gap: 12px; }
 
+  .hero-title-copy h2 {
+    margin: 0;
+    font-size: clamp(34px, 3.4vw, 52px);
+    line-height: 0.96;
+    max-width: 11ch;
+  }
+
   .hero-title-caption {
     color: var(--text-muted);
-    font-size: 13px;
+    font-size: 14px;
     line-height: 1.55;
-    max-width: 46ch;
+    max-width: 42ch;
+  }
+
+  .hero-date-line {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    width: fit-content;
+    min-height: 34px;
+    padding: 0 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.18);
+    background: rgba(15, 23, 42, 0.42);
+    color: #E2E8F0;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
 
   .dashboard-sidekick {
     padding: 26px;
     gap: 18px;
     background: linear-gradient(180deg, rgba(30,41,59,0.72), rgba(15,23,42,0.88));
+    min-height: 320px;
   }
 
   .sidekick-row {
     padding: 14px 0;
+    align-items: flex-start;
   }
 
   .sidekick-status {
@@ -1103,11 +1131,12 @@
   .sidekick-status .sidekick-value {
     font-size: 15px;
     color: #E2E8F0;
+    line-height: 1.45;
   }
 
   .metric-card {
     padding: 22px;
-    min-height: 172px;
+    min-height: 178px;
     background: linear-gradient(180deg, rgba(30,41,59,0.72), rgba(15,23,42,0.86));
   }
 
@@ -1199,8 +1228,8 @@
 
   .card-header { padding: 24px 24px 18px; }
   .card-meta { padding: 18px 24px; }
-  .card-body { padding: 24px; gap: 18px; }
-  .produto-item { padding: 18px; gap: 14px; }
+  .card-body { padding: 26px; gap: 20px; }
+  .produto-item { padding: 20px; gap: 14px; }
 
   .pedido-group,
   .destaque-box,
@@ -1210,6 +1239,59 @@
   }
 
   .destaques-grid { gap: 14px; }
+
+  .pedido-group {
+    border-radius: 20px;
+    overflow: hidden;
+  }
+
+  .pedido-header {
+    min-height: 56px;
+    padding: 16px 18px;
+    font-size: 15px;
+  }
+
+  .pedido-client {
+    padding: 14px 18px;
+  }
+
+  .produto-nome {
+    font-size: 16px;
+    line-height: 1.45;
+  }
+
+  .destaque-label {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+  }
+
+  .destaque-valor {
+    font-size: 19px;
+  }
+
+  .card-subline,
+  .metric-foot,
+  .dashboard-description,
+  .pedido-client,
+  .meta-copy span:first-child {
+    color: #A8B3C7;
+  }
+
+  .dashboard-description {
+    max-width: 56ch;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .meta-item {
+    min-height: 74px;
+  }
+
+  .status-pill,
+  .badge,
+  .status-linha {
+    letter-spacing: 0.06em;
+  }
 
   .copy-lote-btn {
     width: 36px;
@@ -1260,6 +1342,23 @@
     header { width: calc(100% - 20px); }
     .metrics-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .metric-card.metric-hero .metric-value { font-size: 42px; }
+    .hero-title-copy h2 { max-width: none; }
+  }
+
+  @media (max-width: 768px) {
+    .dashboard-info,
+    .dashboard-sidekick {
+      min-height: auto;
+    }
+
+    .hero-title-copy h2 {
+      font-size: clamp(30px, 10vw, 42px);
+      max-width: none;
+    }
+
+    .dashboard-description {
+      font-size: 14px;
+    }
   }
 </style>
 </head>
@@ -1306,11 +1405,12 @@
                 <img src="assets/logo-cysy-3d.png" alt="Logo CYSY Fertilizantes">
               </div>
               <div class="hero-title-copy">
-                <h2 id="tituloDashboard">Central de Faturamento</h2>
+                <h2 id="tituloDashboard">Operações de Faturamento</h2>
+                <div class="hero-date-line" id="heroDateLine"><i data-lucide="calendar-days" class="app-icon icon-finance"></i>Dia operacional</div>
                 <p class="hero-title-caption">Painel profissional com leitura operacional imediata, foco em status, produtividade e rastreio por lote.</p>
               </div>
             </div>
-            <p class="dashboard-description">Monitoramento em tempo real das cargas, bloqueios e registros de não conformidade com leitura rápida, contraste forte e hierarquia visual moderna.</p>
+            <p class="dashboard-description">Visão centralizada das cargas do dia, pedidos vinculados, bloqueios e ocorrências de qualidade com leitura rápida e organização visual consistente.</p>
           </div>
           <div class="dashboard-sidekick">
             <div class="sidekick-row">
@@ -1319,7 +1419,7 @@
             </div>
             <div class="sidekick-row sidekick-status">
               <div class="sidekick-label"><span class="icon-orb"><i data-lucide="activity" class="app-icon icon-success"></i></span>Status da central</div>
-              <div class="sidekick-value" id="heroSystemStatus">Aguardando leitura</div>
+              <div class="sidekick-value" id="heroSystemStatus">Sincronizando dados</div>
             </div>
             <div class="sidekick-row">
               <div class="sidekick-label"><span class="icon-orb"><i data-lucide="package" class="app-icon icon-finance"></i></span>Resumo rápido</div>
@@ -2102,11 +2202,14 @@ const dashboardController = {
       const horaAtualizacao = date.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
       
       document.getElementById('abaAtualLabel').innerText = `Base: ${abaMesAtual.toUpperCase()} • Atualizado às ${horaAtualizacao}`;
-      document.getElementById('tituloDashboard').innerText = `Operações de faturamento em ${dataHojeStr}`;
+      document.getElementById('tituloDashboard').innerText = 'Operações de Faturamento';
+      const heroDateLine = document.getElementById('heroDateLine');
+      if (heroDateLine) heroDateLine.innerHTML = `${iconEngine.icon('calendar-days', 'icon-finance')}Dia ${dataHojeStr}`;
+      iconEngine.refresh();
       const heroUpdatedAt = document.getElementById('heroUpdatedAt');
       if (heroUpdatedAt) heroUpdatedAt.innerText = horaAtualizacao;
       const heroSystemStatus = document.getElementById('heroSystemStatus');
-      if (heroSystemStatus) heroSystemStatus.innerText = navigator.onLine ? 'Sistema online, sincronizando e tentando manter a tela ativa' : 'Modo offline ativo';
+      if (heroSystemStatus) heroSystemStatus.innerText = navigator.onLine ? 'Sistema online e sincronizado' : 'Modo offline ativo';
 
       debugEngine.log(`Data alvo (Hoje): ${dataHojeStr}`, "info");
 
